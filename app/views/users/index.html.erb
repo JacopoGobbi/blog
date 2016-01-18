@@ -12,14 +12,17 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to "Log out", logout_path, method: :delete %></td>
+        <td>
+          <% if user == @user %>
+            <%= link_to 'Show my account (' + user.username + ')', user %>
+          <% else %>
+            <%= link_to 'Show ' + user.username, user %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New User', new_user_path %>
+<br />
+<%= link_to "Log out", logout_path, method: :delete %>
