@@ -1,2 +1,15 @@
 <h1>Welcome back</h1>
-<h2>Login - Register<h2>
+<h2>Login<h2>
+<%= form_for(:session, url: login_path) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+  <br />
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
+  <br />
+  <%= f.submit "Login", class: "btn btn-primary" %>
+<% end %>
+<br />
+<br />
+<%= link_to "Register", signup_path %>
