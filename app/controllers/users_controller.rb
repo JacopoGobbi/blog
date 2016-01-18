@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    unless session?
+      flash[:danger] = "Login please."
+      redirect_to root_path
+    end
     @users = User.all
   end
 
@@ -28,6 +32,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -69,6 +74,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user]
+      params.require(:user).permit(:email, :username, :password_digest)
     end
 end
