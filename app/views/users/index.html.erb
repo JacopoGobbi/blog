@@ -13,7 +13,7 @@
     <% @users.each do |user| %>
       <tr>
         <td>
-          <% if user == @user %>
+          <% if user.id == session[:user_id] %>
             <%= link_to 'Show my account (' + user.username + ')', user %>
           <% else %>
             <%= link_to 'Show ' + user.username, user %>

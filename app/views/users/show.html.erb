@@ -1,9 +1,10 @@
 <%= content_tag :h1, "My account" if @user.id == session[:user_id] %>
 <h2><%= @user.username %> - <%= @user.email %></h2>
-<br />
-<%= link_to "New post", new_post_path %>
-<br />
-<br />
+<% if @user.id == session[:user_id] %>
+  <br />
+  <%= link_to "New post", new_post_path %>
+  <br /><br />
+<% end %>
 <h3>Posts</h3>
 <% @posts.each do |post| %>
   <h4><%= post.title %></h4>
