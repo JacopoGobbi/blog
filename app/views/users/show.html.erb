@@ -4,6 +4,10 @@
   <br />
   <%= link_to "+ New post", new_post_path %>
   <br /><br />
+<% else %>
+  <br />
+  <%= render "follow" %>
+  <br /><br />
 <% end %>
 <h3>Posts</h3>
 <% @posts.each do |post| %>

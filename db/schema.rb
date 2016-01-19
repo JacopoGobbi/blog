@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118075411) do
+ActiveRecord::Schema.define(version: 20160119131348) do
+
+  create_table "follow_relations", force: :cascade do |t|
+    t.integer  "user_following_id", limit: 4
+    t.integer  "user_followed_id",  limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "follow_relations", ["user_followed_id"], name: "index_follow_relations_on_user_followed_id", using: :btree
+  add_index "follow_relations", ["user_following_id", "user_followed_id"], name: "index_follow_relations_on_user_following_id_and_user_followed_id", unique: true, using: :btree
+  add_index "follow_relations", ["user_following_id"], name: "index_follow_relations_on_user_following_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
