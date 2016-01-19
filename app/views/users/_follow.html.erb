@@ -1,7 +1,5 @@
-<button>
-  <% if @active_user.following?(@user) %>
-    You are following <i class="fa fa-check"></i>
-  <% else %>
-    You are NOT following <i class="fa fa-times"></i>
-  <% end %>
-</button>
+<% if @logged_user.following?(@user) %>
+  You are following <i class="fa fa-check"></i>
+<% else %>
+  You are NOT following <i class="fa fa-times"></i>
+<% end %>

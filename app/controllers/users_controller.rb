@@ -1,8 +1,21 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:follow, :show, :edit, :update, :destroy]
+  before_action :set_logged_user, only: [:follow, :show]
 
   # GET /users
   # GET /users.json
+  def follow
+    if @logged_user.following?(@user)
+      @logged_user.unfollow(@user)
+    else
+      @logged_user.follow(@user)
+    end
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+    end
+  end
+
   def index
     unless session?
       flash[:danger] = "Login please."
@@ -15,7 +28,6 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @posts = Post.where(user_id: @user.id)
-    @active_user = User.find(session[:user_id])
   end
 
   # GET /users/new
@@ -74,6 +86,9 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def set_logged_user
+      @logged_user = User.find(session[:user_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :username, :password_digest)

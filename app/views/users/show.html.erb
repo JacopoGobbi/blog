@@ -6,7 +6,9 @@
   <br /><br />
 <% else %>
   <br />
-  <%= render "follow" %>
+  <%= button_to follow_user_path(@user), method: :patch, remote: true, id: "follow" do %>
+    <%= render "follow" %>
+  <% end %>
   <br /><br />
 <% end %>
 <h3>Posts</h3>

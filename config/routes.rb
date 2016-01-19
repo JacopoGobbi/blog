@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :posts
-  resources :users
+  resources :users do
+    patch :follow, on: :member
+  end
   root 'sessions#new'
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
