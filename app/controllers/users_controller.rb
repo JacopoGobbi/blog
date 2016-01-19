@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @posts = Post.where(user_id: @user.id)
+    @active_user = User.find(session[:user_id])
   end
 
   # GET /users/new
